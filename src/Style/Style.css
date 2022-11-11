@@ -61,6 +61,16 @@ table {
 }
 html, body {
   direction: rtl;
+  height: 100vh;
+}
+html #root, body #root {
+  height: 100vh;
+}
+
+.Home {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .Header {
@@ -70,6 +80,7 @@ html, body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0px 1px 3px 1px #A7AABD;
 }
 .Header .Lft {
   display: flex;
@@ -117,4 +128,49 @@ html, body {
 .Header .Rgt button:focus {
   outline: 0px #282f46 solid;
   box-shadow: 0px 0px 2px 1px #caa138;
+}
+
+.Middle {
+  display: flex;
+  flex-direction: row;
+  flex: 2;
+}
+
+.Menu {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #F8F8FF;
+  padding: 15px 0px;
+}
+.Menu .Abtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 5px;
+  border-radius: 3px;
+}
+.Menu .Abtn:hover {
+  background: #A7AABD;
+}
+.Menu .Abtn:hover button {
+  color: #F8F8FF;
+}
+.Menu .Abtn:hover .IcnCrt {
+  color: #F8F8FF;
+}
+.Menu .Abtn button {
+  background: transparent;
+  border: 0px;
+  font-family: "black";
+  font-size: 12pt;
+  color: #282f46;
+}
+.Menu .Abtn .IcnCrt {
+  font-size: 12pt;
+  color: #282f46;
+}
+
+.Desk {
+  flex: 9;
 }/*# sourceMappingURL=Style.css.map */

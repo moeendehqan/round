@@ -1,46 +1,42 @@
 import Header from "../componet/Header"
 import Menu from "../componet/Menu"
 
-import Alarm from "./Alarm";
-import Filter from "./Filter";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 
-import 'react-dyn-tabs/style/react-dyn-tabs.css';
-import 'react-dyn-tabs/themes/react-dyn-tabs-card.css';
-import useDynTabs from 'react-dyn-tabs';
-
-
+import { useState } from "react";
 const Home = () =>{
-    const options = {
-        tabs: [
-          {id: 'Alarm',
-            title: 'هشدار',
-            panelComponent: <Alarm />
-            },
-        ],
-        selectedTabID: 'Alarm',
-      };
 
-    let _instance;
-    const [TabList, PanelList, ready] = useDynTabs(options);
-    ready((instance) => {_instance = instance;});
-
-    
-    const AddTab = function (id_name,title,element) {
-        _instance.open({id: id_name, title: title, panelComponent:element})
-        _instance.select(id_name)
-    }
+    const [ActiveTab, setActiveTab] = useState([])
+    const CloseTab = (key) =>{setActiveTab(ActiveTab.filter((obj) => obj.key != key))}
 
     return(
         <div className="Home">
             <Header/>
-            <div className="Body">
-                <div className="Menu">
-                    <button onClick={()=>AddTab('Alarm','هشدار',<Alarm/>)}>هشدار</button>
-                    <button onClick={()=>AddTab('Filter','فیلتر',<Filter/>)}>فیلتر</button>
-                </div>
-                <div>
-                    <TabList></TabList>
-                    <PanelList></PanelList>
+            <div className="Middle">
+                <Menu ActiveTab={ActiveTab} setActiveTab={setActiveTab}/>
+                <div className="Desk">
+                {ActiveTab==[]?null:
+                <Tabs>
+                    <TabList>
+                        {ActiveTab.map(i=>{
+                            return(
+                                <Tab key={i.key}>
+                                    <div>
+                                        <p>{i.title}</p>
+                                        <button onClick={()=>CloseTab(i.key)}>X</button>
+                                    </div>
+                                </Tab>
+                            )
+                        })}
+                    </TabList>
+                    {ActiveTab.map(i=>{
+                            return(
+                                <TabPanel key={i.key}>{i.element}</TabPanel>
+                            )
+                        })}
+                </Tabs>
+                }
                 </div>
             </div>
 
